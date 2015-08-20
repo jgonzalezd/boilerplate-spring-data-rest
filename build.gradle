@@ -1,0 +1,65 @@
+group 'com.sparks2flames.api'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'idea'
+apply plugin: 'com.bmuschko.tomcat'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.bmuschko:gradle-tomcat-plugin:2.2.2"
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext {
+    log4jVersion = '2.3'
+    springVersion = '4.1.7.RELEASE'
+    tomcatVersion = '8.0.24'
+    env = findProperty('env', 'memory')
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: "${log4jVersion}"
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${log4jVersion}"
+    compile "org.springframework:spring-beans:${springVersion}"
+    compile "org.springframework:spring-context:${springVersion}"
+    compile "org.springframework:spring-context-support:${springVersion}"
+    compile "org.springframework:spring-jdbc:${springVersion}"
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile "org.springframework:spring-test:${springVersion}"
+    testCompile "org.mockito:mockito-core:1.9.5"
+    testCompile "com.h2database:h2:1.4.182"
+
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}"
+    tomcat "org.apache.tomcat.embed:tomcat-embed-logging-log4j:${tomcatVersion}"
+    tomcat "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+    tomcat "org.apache.tomcat:tomcat-dbcp:${tomcatVersion}"
+}
+
+tomcat {
+    httpPort = 9080
+    ajpPort = 9009
+    stopPort = 9081
+}
+
+[tomcatRun, tomcatRunWar].each { task ->
+    task.contextPath = 'agency-standardization-account'
+    task.configFile = file("src/test/tomcat/${env}-context.xml")
+    // task.daemon = true
+}
+
+def String findProperty(key, defaultVal) {
+    return System.properties.containsKey(key) ? System.properties[key] : defaultVal
+}

@@ -22,6 +22,10 @@ ext {
     log4jVersion = '2.3'
     springVersion = '4.1.7.RELEASE'
     tomcatVersion = '8.0.24'
+    springDataRestVersion= '2.3.2.RELEASE'
+    springDataJPAVersion='1.8.2.RELEASE'
+    hibernateVersion ='4.3.11.Final'
+
     env = findProperty('env', 'memory')
 }
 
@@ -35,13 +39,18 @@ dependencies {
     compile "org.springframework:spring-beans:${springVersion}"
     compile "org.springframework:spring-context:${springVersion}"
     compile "org.springframework:spring-context-support:${springVersion}"
-    compile "org.springframework:spring-jdbc:${springVersion}"
+    compile "org.springframework.data:spring-data-rest-webmvc:${springDataRestVersion}" //Expose JPA Entities through REST
+    compile "org.springframework.data:spring-data-jpa:${springDataJPAVersion}"          //not included in data-rest
+    compile "org.hibernate:hibernate-entitymanager:${hibernateVersion}"                 //actual implementation of JPA, contains hibernate-core
+    compile "org.springframework:spring-jdbc:${springVersion}"                          //For profiles
+
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile "org.springframework:spring-test:${springVersion}"
     testCompile "org.mockito:mockito-core:1.9.5"
     testCompile "com.h2database:h2:1.4.182"
 
+    tomcat "com.h2database:h2:1.4.182"          //Otherwise not loaded when tomcat started
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}"
     tomcat "org.apache.tomcat.embed:tomcat-embed-logging-log4j:${tomcatVersion}"
     tomcat "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"

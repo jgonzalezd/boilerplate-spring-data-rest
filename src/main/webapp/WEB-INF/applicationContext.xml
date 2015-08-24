@@ -9,7 +9,7 @@
     <!--No web logic has been added to this project yet-->
 
     <import resource="classpath:persistence-context.xml" />
-    <context:component-scan base-package="com.micetechnologies.datingapp" />
+    <context:component-scan base-package="com.micetechnologies.app" />
     <context:property-placeholder location="classpath:application.properties" ignore-unresolvable="false"/>
 
 

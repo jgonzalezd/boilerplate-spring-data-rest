@@ -1,6 +1,6 @@
-package com.micetechnologies.datingapp.repository;
+package com.micetechnologies.app.repository;
 
-import com.micetechnologies.datingapp.entity.Profile;
+import com.micetechnologies.app.entity.Profile;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 

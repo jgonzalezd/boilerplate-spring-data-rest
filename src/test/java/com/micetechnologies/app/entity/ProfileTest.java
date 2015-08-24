@@ -1,6 +1,6 @@
-package com.micetechnologies.datingapp.entity;
+package com.micetechnologies.app.entity;
 
-import com.micetechnologies.datingapp.BaseTest;
+import com.micetechnologies.app.BaseTest;
 import org.junit.Test;
 import org.springframework.test.context.ActiveProfiles;
 

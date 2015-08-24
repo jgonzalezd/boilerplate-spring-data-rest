@@ -15,12 +15,12 @@
 
     <import resource="classpath:test-context-profiles.xml" />
     <tx:annotation-driven transaction-manager="transactionManager"/>
-    <jpa:repositories base-package="com.micetechnologies.datingapp.repository" />
+    <jpa:repositories base-package="com.micetechnologies.app.repository" />
     <context:property-placeholder location="classpath:application.properties" ignore-unresolvable="false"/>
 
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="packagesToScan" value="com.micetechnologies.datingapp.entity" />
+        <property name="packagesToScan" value="com.micetechnologies.app.entity" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
         </property>

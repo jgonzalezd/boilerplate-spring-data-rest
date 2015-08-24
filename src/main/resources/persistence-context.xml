@@ -17,13 +17,13 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <jpa:repositories base-package="com.micetechnologies.datingapp.repository" />
+    <jpa:repositories base-package="com.micetechnologies.app.repository" />
 
     <jee:jndi-lookup id="dataSource" jndi-name="jdbc/datingapp"
                      expected-type="javax.sql.DataSource" />
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="packagesToScan" value="com.micetechnologies.datingapp.entity" />
+        <property name="packagesToScan" value="com.micetechnologies.app.entity" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
         </property>

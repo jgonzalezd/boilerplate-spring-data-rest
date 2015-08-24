@@ -1,4 +1,4 @@
-package com.micetechnologies.datingapp.entity;
+package com.micetechnologies.app.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
